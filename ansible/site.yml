@@ -1,8 +1,8 @@
 - hosts: all
   become: true
   roles:
-    # - hello
+     - hello
     # - lumiukko
     # - antero
     # - nginx1    
-    - caddy
+    # - caddy

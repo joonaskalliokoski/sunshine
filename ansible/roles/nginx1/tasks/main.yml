@@ -1,0 +1,22 @@
+- apt:
+    name: nginx
+    state: present
+- copy:
+    dest: "/etc/nginx/sites-available/heitesti.com.conf"
+    src: "heitesti.com.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  notify: restart nginx
+
+- file:
+    src: /etc/nginx/sites-available/heitesti.com.conf
+    dest: /etc/nginx/sites-enabled/heitesti.com.conf
+    owner: root
+    group: root
+    state: link
+  notify: restart nginx
+- file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: restart nginx

@@ -1,0 +1,21 @@
+- user:
+    name: antero
+    state: present
+- authorized_key:
+    user: antero
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICFrzWqEffuA1XOM/ASxKA8ctw/sq8fHaMxMCF2meli9 joonas@testipalvelin"
+- copy:
+    dest: "/tmp/fileD.txt"
+    content: | 
+      tämä on testi
+      testi
+      testi
+    owner: antero
+    group: antero
+    mode: '0600'
+- name: "näytä uptime"
+  command: uptime
+  register: uptime_tulos
+- name: "tulosta uptime"
+  debug:
+    var: uptime_tulos.stdout

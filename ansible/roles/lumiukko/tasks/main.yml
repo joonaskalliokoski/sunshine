@@ -1,0 +1,22 @@
+- group:
+    name: "sudoless"
+    state: present
+- user:
+    name: "lumiukko"
+    state: present
+    groups: ["sudoless", "sudo", "adm"]
+- authorized_key:
+    user: "lumiukko"
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICFrzWqEffuA1XOM/ASxKA8ctw/sq8fHaMxMCF2meli9 joonas@testipalvelin"
+- copy:
+    dest: "/etc/sudoers.d/sudoless"
+    content: "%sudoless ALL = (ALL) NOPASSWD: ALL\n"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+- apt:
+    name:
+      - git
+      - htop
+    state: present 
+    

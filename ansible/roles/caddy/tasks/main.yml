@@ -1,0 +1,28 @@
+- apt: 
+    name: caddy
+    state: present
+    update_cache: yes
+
+- file:
+    path: "/etc/caddy"
+    state: directory
+    owner: root
+    group: root
+    mode: "755"
+    
+- copy:
+    src: "Caddyfile"
+    dest: "/etc/caddy/Caddyfile"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart caddy
+
+- service:
+    name: caddy
+    state: started
+    enabled: yes
+
+- service: 
+    name: nginx
+    state: stopped
